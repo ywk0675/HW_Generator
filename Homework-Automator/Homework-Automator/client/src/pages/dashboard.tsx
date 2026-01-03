@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { WordMemoryLab } from "@/components/word/word-memory-lab";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
@@ -383,17 +384,23 @@ export default function Dashboard() {
 
         {/* Main Preview Area */}
         <main className="flex-1 bg-gray-200/50 relative overflow-hidden flex flex-col">
-          {!book ? (
-             <div className="h-full flex flex-col items-center justify-center text-gray-400 p-8 text-center animate-in fade-in zoom-in-95 duration-500">
+          <div className="p-6 pb-4 bg-white/80 backdrop-blur border-b border-gray-200 overflow-y-auto">
+            <WordMemoryLab />
+          </div>
+          <div className="flex-1 min-h-0">
+            {!book ? (
+              <div className="h-full flex flex-col items-center justify-center text-gray-400 p-8 text-center animate-in fade-in zoom-in-95 duration-500">
                 <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-gray-100">
                   <Settings className="h-10 w-10 text-gray-300" />
                 </div>
                 <h3 className="font-bold text-gray-600 text-lg">Setup Your Book</h3>
-                <p className="max-w-xs text-sm mt-2 text-gray-500">Configure global themes or daily topics in the sidebar, then click Generate.</p>
-             </div>
-          ) : (
-            <ScrollArea className="flex-1 w-full h-full p-8 bg-gray-200/50">
-               <div className="max-w-[210mm] mx-auto pb-20 origin-top" ref={printRef}>
+                <p className="max-w-xs text-sm mt-2 text-gray-500">
+                  Configure global themes or daily topics in the sidebar, then click Generate.
+                </p>
+              </div>
+            ) : (
+              <ScrollArea className="flex-1 w-full h-full p-8 bg-gray-200/50">
+                <div className="max-w-[210mm] mx-auto pb-20 origin-top" ref={printRef}>
                   {book.days.map(day => (
                     <div key={day.day} className="mb-8">
                        {/* Explicit 4-Page Structure */}
@@ -413,7 +420,8 @@ export default function Dashboard() {
                   ))}
                </div>
             </ScrollArea>
-          )}
+            )}
+          </div>
         </main>
       </div>
     </div>
